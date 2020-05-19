@@ -1,4 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
+using Dapper;
+using legos.Models;
 
 namespace legos.Repositories
 {
@@ -9,6 +14,12 @@ namespace legos.Repositories
         public SetsRepository(IDbConnection db)
         {
             _db = db;
+        }
+
+        internal IEnumerable<Set> GetAll()
+        {
+            string sql = "SELECT * FROM sets";
+            return _db.Query<Set>(sql);
         }
     }
 }

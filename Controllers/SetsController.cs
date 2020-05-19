@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using legos.Models;
 using legos.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,6 +18,19 @@ namespace legos.Controllers
         public SetsController(SetsService ss)
         {
             _ss = ss;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Set>> GetAll()
+        {
+            try
+            {
+                return Ok(_ss.GetAll());
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
         }
     }
 }

@@ -8,5 +8,6 @@ namespace legos.Models
         [Required]
         public string Name { get; set; }
         public int Pieces { get; set; }
+        public string Creator { get; set; }
     }
 }
