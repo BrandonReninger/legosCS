@@ -22,6 +22,12 @@ namespace legos.Repositories
             return _db.Query<Set>(sql);
         }
 
+        internal Set GetById(int id)
+        {
+            string sql = "SELECT * FROM sets WHERE id = @Id";
+            return _db.QueryFirstOrDefault<Set>(sql, new { id });
+        }
+
         internal Set Create(Set newSet)
         {
             string sql = @"
@@ -32,6 +38,26 @@ namespace legos.Repositories
             SELECT LAST_INSERT_ID()";
             newSet.Id = _db.ExecuteScalar<int>(sql, newSet);
             return newSet;
+        }
+
+        //NOTE keep bool as bool!
+        internal bool Delete(int id)
+        {
+            string sql = "DELETE FROM sets WHERE id = @Id LIMIT 1";
+            int affectedRows = _db.Execute(sql, new { id });
+            return affectedRows == 1;
+        }
+
+        internal Set Edit(Set setToUpdate)
+        {
+            string sql = @"
+            UPDATE sets 
+            SET
+            name = @Name,
+            pieces = @Pieces
+            WHERE id = @Id LIMIT 1";
+            _db.Execute(sql, setToUpdate);
+            return setToUpdate;
         }
     }
 }

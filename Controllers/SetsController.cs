@@ -33,6 +33,19 @@ namespace legos.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<Set> GetById(int id)
+        {
+            try
+            {
+                return Ok(_ss.GetById(id));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
         [HttpPost]
         public ActionResult<Set> Create([FromBody] Set newSet)
         {
@@ -40,6 +53,32 @@ namespace legos.Controllers
             {
                 newSet.Creator = "Brandon";
                 return Ok(_ss.Create(newSet));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Set> Delete(int id)
+        {
+            try
+            {
+                return Ok(_ss.Delete(id));
+            }
+            catch (System.Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<Set> Edit(int id, [FromBody] Set updatedSet)
+        {
+            try
+            {
+                return Ok(_ss.Edit(id, updatedSet));
             }
             catch (System.Exception err)
             {
