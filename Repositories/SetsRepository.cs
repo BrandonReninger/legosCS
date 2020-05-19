@@ -21,5 +21,17 @@ namespace legos.Repositories
             string sql = "SELECT * FROM sets";
             return _db.Query<Set>(sql);
         }
+
+        internal Set Create(Set newSet)
+        {
+            string sql = @"
+            INSERT INTO sets
+            (name, pieces, creator)
+            VALUES
+            (@Name, @Pieces, @Creator);
+            SELECT LAST_INSERT_ID()";
+            newSet.Id = _db.ExecuteScalar<int>(sql, newSet);
+            return newSet;
+        }
     }
 }

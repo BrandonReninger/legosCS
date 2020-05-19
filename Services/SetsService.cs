@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using legos.Models;
 using legos.Repositories;
 
 namespace legos.Services
@@ -16,6 +17,12 @@ namespace legos.Services
         public IEnumerable GetAll()
         {
             return _repo.GetAll();
+        }
+
+        internal Set Create(Set newSet)
+        {
+            Set createdSet = _repo.Create(newSet);
+            return createdSet;
         }
     }
 }
