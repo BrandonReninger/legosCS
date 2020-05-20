@@ -10,4 +10,10 @@ namespace legos.Models
         public int Pieces { get; set; }
         public string Creator { get; set; }
     }
+
+    public class BlockSetViewModel : Set
+    {
+        public int blockSetId { get; set; }
+        public string Block { get; set; }
+    }
 }

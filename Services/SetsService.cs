@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using legos.Models;
 using legos.Repositories;
 
@@ -51,6 +52,11 @@ namespace legos.Services
             foundSet.Name = updatedSet.Name;
             foundSet.Pieces = updatedSet.Pieces;
             return _repo.Edit(foundSet);
+        }
+
+        internal IEnumerable<BlockSetViewModel> GetSetsByBlockId(int id)
+        {
+            return _repo.GetSetsByBlockId(id);
         }
     }
 }

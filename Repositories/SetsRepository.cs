@@ -59,5 +59,19 @@ namespace legos.Repositories
             _db.Execute(sql, setToUpdate);
             return setToUpdate;
         }
+
+        internal IEnumerable<BlockSetViewModel> GetSetsByBlockId(int blockId)
+        {
+            string sql = @"
+            SELECT 
+            s.*
+            b.shape AS block,
+            bs.id AS BlockSetId
+            FROM blocksets bs
+            INNER JOIN sets s ON s.id = bs.setId
+            INNER JOIN blocks b ON b.id = bs.blockId
+            WHERE blockId = @blockId";
+            return _db.Query<BlockSetViewModel>(sql, new { blockId });
+        }
     }
 }
